@@ -27,17 +27,5 @@ def fixedPayment(balance, annualInterestRate):
 
     print('Lowest Payment: ', monthlyPayment)
 
-# calculate fixed monthly payment with bisection search in order to pay off card in 12 months
-def biSectionFixedPayment(balance, annualInterestRate):
-    interest = annualInterestRate/12
-    low = balance/12
-    high = (balance*(1 + interest)**12)/12.0
-
-    print(interest, low, high)
-
-
-
-
-# calBalance(42, 0.2, 0.04)
-# fixedPayment(3329, 0.2)
-biSectionFixedPayment(3329, 0.2)
+calBalance(42, 0.2, 0.04)
+fixedPayment(3329, 0.2)
