@@ -5,10 +5,7 @@ def gcdIter(a, b):
     returns: a positive integer, the greatest common divisor of a & b.
     '''
 
-    if a > b:
-      test = b
-    else:
-      test = a
+    test = min(a,b)
     
     if test == 1:
       return 1
