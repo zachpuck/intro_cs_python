@@ -10,4 +10,34 @@ def calBalance(balance, annualInterestRate, monthlyPaymentRate):
 
     print('Remaining balance: ', round(newBalance, 2))
 
-calBalance(42, 0.2, 0.04)
+# calculate fixed monthly payment in order to pay off card in 12 months
+def fixedPayment(balance, annualInterestRate):
+    monthlyPayment = 10
+    currentBalance = balance
+
+    while currentBalance > 0:
+
+        for month in range(12):
+            currentBalance -= monthlyPayment
+            interest = (annualInterestRate/12.0)*currentBalance
+            currentBalance += interest
+        if currentBalance > 0:
+            currentBalance = balance
+            monthlyPayment += 10
+
+    print('Lowest Payment: ', monthlyPayment)
+
+# calculate fixed monthly payment with bisection search in order to pay off card in 12 months
+def biSectionFixedPayment(balance, annualInterestRate):
+    interest = annualInterestRate/12
+    low = balance/12
+    high = (balance*(1 + interest)**12)/12.0
+
+    print(interest, low, high)
+
+
+
+
+# calBalance(42, 0.2, 0.04)
+# fixedPayment(3329, 0.2)
+biSectionFixedPayment(3329, 0.2)
