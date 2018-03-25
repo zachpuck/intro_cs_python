@@ -71,7 +71,16 @@ def getWordScore(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    # TO DO ... <-- Remove this comment when you code this function
+
+    wordScore = 0
+    for c in word:
+        wordScore += SCRABBLE_LETTER_VALUES[c]
+    wordScore *= len(word)
+
+    if len(word) == n:
+        wordScore += 50
+
+    return wordScore
 
 
 
@@ -142,7 +151,10 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    updatedHand = hand.copy()
+    for c in word:
+        updatedHand[c] -= 1
+    return updatedHand
 
 
 
