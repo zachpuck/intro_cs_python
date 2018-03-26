@@ -191,7 +191,11 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    return len(hand.keys())
+    count = 0
+    for l in hand:
+        if hand[l] > 0:
+            count += hand[l]
+    return count
 
 def playHand(hand, wordList, n):
     """
