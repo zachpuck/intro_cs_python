@@ -79,10 +79,7 @@ def getWordScore(word, n):
 
     if len(word) == n:
         wordScore += 50
-
     return wordScore
-
-
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -156,8 +153,6 @@ def updateHand(hand, word):
         updatedHand[c] -= 1
     return updatedHand
 
-
-
 #
 # Problem #3: Test word validity
 #
@@ -172,8 +167,18 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    handCopy = hand.copy()
 
+    if word in wordList:
+        for c in word:
+            if handCopy.get(c, 0) > 0:
+                handCopy[c] = handCopy.get(c, 0) - 1
+            else:
+                return False
+    else:
+        return False
+
+    return True
 
 #
 # Problem #4: Playing a hand
