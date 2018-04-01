@@ -102,23 +102,23 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        self.letterDict = {}
+        letterDict = {}
 
         for l in string.ascii_lowercase:
-            self.letterDict[l] = l
-            self.letterDict[l.upper()] = l.upper()
+            letterDict[l] = l
+            letterDict[l.upper()] = l.upper()
 
-        for c in self.letterDict:
+        for c in letterDict:
             if c.islower():
                 if (ord(c) + shift) <= 122:
-                    self.letterDict[c] = chr(ord(c) + shift)
-                    self.letterDict[c.upper()] = chr(ord(c) + shift).upper()
+                    letterDict[c] = chr(ord(c) + shift)
+                    letterDict[c.upper()] = chr(ord(c) + shift).upper()
                 else:
                     diff = (ord(c) + shift) - 122
-                    self.letterDict[c] = chr(96 + diff)
-                    self.letterDict[c.upper()] = chr(96 + diff).upper()
+                    letterDict[c] = chr(96 + diff)
+                    letterDict[c.upper()] = chr(96 + diff).upper()
 
-        return self.letterDict
+        return letterDict
 
     def apply_shift(self, shift):
         '''
@@ -132,8 +132,15 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        self.shiftedDict = self.build_shift_dict(shift)
-        print(self.shiftedDict)
+        shiftedMessage = ''
+
+        shiftedDict = self.build_shift_dict(shift)
+        for c in self.message_text:
+            if ord(c) >= 97 and ord(c) <= 122 or ord(c) >= 65 and ord(c) <= 90:
+                shiftedMessage += shiftedDict[c]
+            else:
+                shiftedMessage += c
+        return shiftedMessage 
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -234,4 +241,6 @@ ciphertext = CiphertextMessage('jgnnq')
 print('Expected Output:', (24, 'hello'))
 print('Actual Output:', ciphertext.decrypt_message())
 
-Message.apply_shift(message_text, 2)
+testMessage = Message('we are taking 6.00.1x')
+# print(testMessage.get_message_text())
+testMessage.apply_shift(2)
